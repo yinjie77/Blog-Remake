@@ -1,0 +1,118 @@
+.head {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 12vh;
+  background: #fff;
+  z-index: 100;
+}
+
+.headIcon {
+  width: 10vw;
+  font-size: 6em;
+  color: #5c64a4 !important;
+}
+
+.headUnLogin,
+.headLogin {
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  width: 11vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.right {
+  width: 15vw;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  right: 3vw;
+}
+
+
+.headBtn,
+.loginOutBtn {
+  font-size: 1.5em;
+  color: #5c64a4;
+  transition: 0.5s;
+}
+
+.headBtn:hover,
+.loginBtn:hover,
+.loginOutBtn:hover {
+  background: #5c64a4;
+  color: #fff;
+}
+
+
+.loginBtn {
+  position: relative;
+  right: 3vw;
+  font-size: 1.5em;
+  border: none;
+  background: #fff;
+  color: #5c64a4;
+  transition: 0.5s;
+}
+
+.loginOutBtn {
+  border: none;
+  background: #fff;
+}
+
+
+
+
+.banner-bg {
+  width: 100%;
+  height: 60vh;
+  background-color: rgba(239, 244, 250, 0.24);
+  position: relative;
+  margin-bottom: 6.8vw;
+}
+
+.contect-container {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.contect-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.welcome-contect {
+  font-size: 2.4vw;
+  color: #b7bed4;
+}
+
+.title-contect {
+  font-size: 3.2vw;
+  color: #5c64a4;
+}
+
+.subtitle-contect {
+  font-size: 1.6vw;
+  color: #7c9ac3;
+}
+
+.bg-images {
+  width: 35vw;
+  height: 65vh;
+  background: url('./image/learning.png') no-repeat center center;
+  background-size: 100% 100%;
+  margin-right: -100px;
+}
