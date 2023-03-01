@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 import Blog from './components/Blog'
-import LoginForm from './components/LoginForm'
 import AddForm from './components/addForm'
 import Togglable from './components/Togglable'
 import Users from './components/Users'
 import User from './components/User'
 import SingleBlog from './components/singleBlog'
-import CreateAccount from './components/CreateAccount'
 
 import blogService from './services/blogs'
 import usersService from './services/users'
@@ -18,10 +16,11 @@ import { addUsers } from './reducer/usersReducer'
 import { useDispatch, useSelector } from 'react-redux'
 
 
-import { Switch, Route, useRouteMatch, Link } from 'react-router-dom'
+import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
-import { Modal, Button, message } from 'antd';
-import { YahooOutlined } from '@ant-design/icons';
+import { message } from 'antd';
+
+import Head from './page/Head'
 
 import './App.css'
 
@@ -30,17 +29,7 @@ const App = () => {
 
   const loggedUser = useSelector(state => state.loggedUser)
   const [users, setUsers] = useState([])
-  const [modalState, setModalState] = useState('登录');
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleModalCancel = () => {
-    setIsModalVisible(false);
-    setModalState('登录'); // 回到登录状态
-  };
 
   const matchUser = useRouteMatch('/users/:id')
   const user = matchUser
@@ -64,15 +53,6 @@ const App = () => {
 
   }, [dispatch])
 
-
-  const loginout = () => {
-    if (window.localStorage.getItem('loggedBlogappUser')) {
-      window.localStorage.removeItem('loggedBlogappUser')
-      dispatch(setLoggedUser(null))
-    }
-    location.replace('/')
-
-  }
   const addBlog = (blogObject, title) => {
     dispatch(setBlogs(blogObject))
   }
@@ -99,58 +79,12 @@ const App = () => {
     message.success('删除成功')
     location.replace('/')
   }
-  const padding = {
-    padding: 20,
-    color: 'black',
-  }
-
 
   return (
     <div >
-
       {/* head */}
-      <div className='head'>
-
-        <YahooOutlined className='headIcon' />
-
-
-        {loggedUser
-          ?
-          <div className='headLogin'>
-            <div className='left'>
-              <Link to='/blogs' className='headBtn'>博客</Link>
-              <Link to='/users' className='headBtn'>用户</Link>
-            </div>
-            <div className='right'>
-              <Link to={`/users/${loggedUser.id}`} className='headBtn'>{loggedUser.username}</Link>
-              <button href='#' onClick={loginout} className='loginOutBtn'>退出登录</button>
-            </div>
-          </div>
-          :
-          <div className='headUnLogin'>
-            <Link to='/blogs' className='headBtn'>
-              博客
-            </Link>
-            <button onClick={showModal} className='loginBtn' >
-              注册 | 登录
-            </button>
-
-          </div>
-        }
-      </div>
-
+      <Head loggedUser={loggedUser} />
       {/* content */}
-      <Modal
-        style={{ maxWidth: '400px', textAlign: 'center' }}
-        title={modalState}
-        visible={isModalVisible}
-        footer={false}
-        onCancel={handleModalCancel}
-      >
-        {modalState === '登录' && <LoginForm setModalState={setModalState} />}
-        {modalState === '注册' && <CreateAccount setModalState={setModalState} />}
-
-      </Modal>
       <div className='banner-bg'>
         <div className='contect-container'>
           <div className='contect-zone'>
