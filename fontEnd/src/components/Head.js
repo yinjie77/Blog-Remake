@@ -60,9 +60,10 @@ export default function Head({ loggedUser }) {
                 </div>
             }
             <Modal
+                
                 style={{ maxWidth: '400px', textAlign: 'center' }}
                 title={modalState}
-                visible={isModalVisible}
+                open={isModalVisible}
                 footer={false}
                 onCancel={handleModalCancel}
             >

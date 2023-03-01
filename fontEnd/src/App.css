@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
+  width: 98vw;
   height: 12vh;
   background: #fff;
   z-index: 100;
@@ -73,7 +73,7 @@
 
 /* banner */
 .banner-bg {
-  width: 100vw;
+  width: 98vw;
   height: 60vh;
   background-color: rgba(239, 244, 250, 0.24);
   position: relative;
@@ -124,4 +124,15 @@
   color: #5c64a4;
   width: 100vw;
   margin-bottom: 3vh;
+}
+
+.addBlogBtn {
+  margin-bottom: 2vh;
+  background: #5c64a4 !important;
+  color: #fff !important;
+}
+
+.addForm{
+  width: 97vw;
+  margin-top: 10vh;
 }

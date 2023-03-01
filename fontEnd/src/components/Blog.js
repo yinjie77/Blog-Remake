@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { List, Skeleton, Avatar, Space } from 'antd';
+import { List, Skeleton, Avatar, Space, Button, Modal } from 'antd';
 import { LikeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
-
 
 const Blog = () => {
 
@@ -25,46 +24,51 @@ const Blog = () => {
   return (
     <div >
       <div className='contentHeadText'>博客</div>
-
       {blogs.length == 0 ?
         <Skeleton active paragraph={{ rows: 10 }} />
         :
-        <List
-          itemLayout="vertical"
-          size="large"
-          pagination={{
-            pageSize: 3,
-          }}
-          dataSource={blogs}
+        <>
+          <Link to='/addblog'>
+            <Button type="primary" block shape='round' className='addBlogBtn' >
+              发布新博客
+            </Button>
+          </Link>
+          <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+              pageSize: 3,
+            }}
+            dataSource={blogs}
+            bordered={true}
 
-          renderItem={(item) => (
-            <List.Item
-              key={item.id}
-              actions={[
-                <IconText icon={UserOutlined} text={item.author} key="list-vertical-like-o" />,
-                <IconText icon={LikeOutlined} text={item.likes} key="list-vertical-like-o" />,
-                <IconText icon={MessageOutlined} text={item.comments.length} key="list-vertical-message" />,
-              ]}
-              extra={
-                <img
-                  width={272}
-                  alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            renderItem={(item) => (
+              <List.Item
+                key={item.id}
+                actions={[
+                  <IconText icon={UserOutlined} text={item.author} key="list-vertical-like-o" />,
+                  <IconText icon={LikeOutlined} text={item.likes} key="list-vertical-like-o" />,
+                  <IconText icon={MessageOutlined} text={item.comments.length} key="list-vertical-message" />,
+                ]}
+                extra={
+                  <img
+                    width={272}
+                    alt="logo"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  />
+                }
+              >
+                <List.Item.Meta
+                  avatar={<Avatar src={item.avatar} />}
+                  title={<Link to={`/blogs/${item.id}`}>{item.title}</Link>}
+                  description={item.description}
                 />
-              }
-            >
-              <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
-                title={<Link to={`/blogs/${item.id}`}>{item.title}</Link>}
-                description={item.description}
-              />
-              {item.content}
-            </List.Item>
-          )}
-        />
+                {item.content}
+              </List.Item>
+            )}
+          />
+        </>
       }
-
-
     </div>
 
   )

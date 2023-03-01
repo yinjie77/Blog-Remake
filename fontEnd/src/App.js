@@ -99,9 +99,12 @@ const App = () => {
           <Route path='/blogs/:id'>
             <SingleBlog handleLikes={handleLikes} handleRemoving={handleRemoving} loggedUser={loggedUser} />
           </Route>
+          <Route path='/addblog'>
+            <AddForm createBlog={addBlog} />
+          </Route>
           <Route path='/'>
             <Blog />
-            {loggedUser ? createBlog() : null}
+            {/* {loggedUser ? createBlog() : null} */}
           </Route>
         </Switch>
       </div>
