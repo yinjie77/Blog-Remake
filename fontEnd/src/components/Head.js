@@ -3,8 +3,8 @@ import { YahooOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setLoggedUser } from '../reducer/loggedUserReducer';
-import LoginForm from '../components/LoginForm';
-import CreateAccount from '../components/CreateAccount';
+import LoginForm from './LoginForm';
+import CreateAccount from './CreateAccount';
 
 import { Modal } from 'antd';
 import { useState } from 'react';

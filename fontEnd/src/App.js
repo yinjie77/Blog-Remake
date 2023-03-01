@@ -20,8 +20,8 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import { message } from 'antd';
 
-import Head from './page/Head'
-import Banner from './page/Banner'
+import Head from './components/Head'
+import Banner from './components/Banner'
 
 import './App.css'
 
