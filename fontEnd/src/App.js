@@ -89,18 +89,6 @@ const App = () => {
       <Banner />
       {/* content */}
       <div>
-        <div
-          style={{
-            fontSize: '32px',
-            textAlign: 'center',
-            color: '#5c64a4',
-            width: '100%',
-            marginBottom: '20px'
-          }}
-        >
-          博客
-        </div>
-
         <Switch>
           <Route path="/users/:id">
             <User user={user} />

@@ -116,3 +116,12 @@
   background-size: 100% 100%;
   margin-right: -100px;
 }
+
+/* content */
+.contentHeadText {
+  font-size: 3em;
+  text-align: center;
+  color: #5c64a4;
+  width: 100vw;
+  margin-bottom: 3vh;
+}
