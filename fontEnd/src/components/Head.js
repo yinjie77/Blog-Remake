@@ -30,6 +30,10 @@ export default function Head({ loggedUser }) {
         setIsModalVisible(false);
         setModalState('登录'); // 回到登录状态
     };
+
+    const move = () => {
+        document.body.scrollTop = document.documentElement.scrollTop = 450
+    }
     return (
         <div className='head'>
             <YahooOutlined className='headIcon' />
@@ -37,17 +41,17 @@ export default function Head({ loggedUser }) {
                 ?
                 <div className='headLogin'>
                     <div className='left'>
-                        <Link to='/blogs' className='headBtn'>博客</Link>
-                        <Link to='/users' className='headBtn'>用户</Link>
+                        <Link to='/blogs' className='headBtn' onClick={move}>博客</Link>
+                        <Link to='/users' className='headBtn' onClick={move}>用户</Link>
                     </div>
                     <div className='right'>
-                        <Link to={`/users/${loggedUser.id}`} className='headBtn'>{loggedUser.username}</Link>
+                        <Link to={`/users/${loggedUser.id}`} className='headBtn' onClick={move}>{loggedUser.username}</Link>
                         <button href='#' onClick={loginout} className='loginOutBtn'>退出登录</button>
                     </div>
                 </div>
                 :
                 <div className='headUnLogin'>
-                    <Link to='/blogs' className='headBtn'>
+                    <Link to='/blogs' className='headBtn' onClick={move}>
                         博客
                     </Link>
                     <button onClick={showModal} className='loginBtn' >
