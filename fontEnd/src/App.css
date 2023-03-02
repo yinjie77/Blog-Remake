@@ -132,7 +132,14 @@
   color: #fff !important;
 }
 
-.addForm{
+.addForm {
   width: 97vw;
   margin-top: 10vh;
+}
+
+.formBtn {
+  margin: 0 auto;
+  width: 25vw;
+  background: #5c64a4 !important;
+  border: none !important;
 }

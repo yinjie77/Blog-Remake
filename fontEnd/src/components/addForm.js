@@ -5,11 +5,10 @@ import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 
 const AddForm = ({ createBlog }) => {
-  const [value, setValue] = React.useState(``);
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const [value, setValue] = React.useState(``);
 
   const addBlog = () => {
 
@@ -17,12 +16,12 @@ const AddForm = ({ createBlog }) => {
       {
         title: title,
         author: author,
-        url: url
+        url: value
       }
     )
     setTitle('')
     setAuthor('')
-    setUrl('')
+    setValue('')
     location.replace('/')
     message.success('创建成功')
   }
@@ -32,7 +31,7 @@ const AddForm = ({ createBlog }) => {
     >
       <Form
         onFinish={addBlog}
-        style={{ width: '100%', margin: '10px 14px' }}
+        style={{ width: '100%', margin: '10px 14px', display: 'flex', flexDirection: 'column' }}
       >
         <Form.Item
           name="title"
@@ -65,16 +64,7 @@ const AddForm = ({ createBlog }) => {
           name="content"
           rules={[{ required: true, message: '请输入文章内容' }]}
         >
-          {/* <TextArea
-            allowClear='true'
-            showCount='true'
-            autoSize={{ minRows: 5 }}
-            placeholder="内容（转载请在文末附上原创链接）"
-            onChange={({ target }) => {
-              setUrl(target.value)
-            }}
-            rows={20}
-          /> */}
+
           <MDEditor
             value={value}
             onChange={setValue}
@@ -83,7 +73,7 @@ const AddForm = ({ createBlog }) => {
             }}
           />
         </Form.Item>
-        <Button type="primary" htmlType="submit" style={{ color: 'white', backgroundColor: 'rgb(92, 100, 164)' }}>创建</Button>
+        <Button type="primary" htmlType="submit" className='formBtn'>创建</Button>
       </Form>
 
     </div>
