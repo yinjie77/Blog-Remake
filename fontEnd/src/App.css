@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 98vw;
+  width: 100vw;
   height: 12vh;
   background: #fff;
   z-index: 100;
@@ -122,7 +122,7 @@
   font-size: 3em;
   text-align: center;
   color: #5c64a4;
-  width: 100vw;
+  width: 98vw;
   margin-bottom: 3vh;
 }
 
@@ -142,4 +142,29 @@
   width: 25vw;
   background: #5c64a4 !important;
   border: none !important;
+}
+
+/* footer */
+.footer {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #5c64a4;
+}
+
+.wechat {
+  width: 5vw;
+  height: 5vw;
+  background-image: url(./image/wechat.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.contact {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #fff;
 }

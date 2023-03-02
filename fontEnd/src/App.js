@@ -22,6 +22,7 @@ import { message } from 'antd';
 
 import Head from './components/Head'
 import Banner from './components/Banner'
+import Footer from './components/Footer'
 
 import './App.css'
 
@@ -109,17 +110,7 @@ const App = () => {
         </Switch>
       </div>
       {/*footer*/}
-      <div style={{ textAlign: 'center', lineHeight: '50px', backgroundColor: 'rgba(239, 244, 250, 0.24)', color: 'black', height: '100px', verticalAlign: 'middle' }} >
-        yinjie77
-        <div>
-          <a
-            href="#"
-            style={{ color: 'black' }}
-          >
-            QQ群-关于-联系我
-          </a>
-        </div>
-      </div>
+      <Footer />
     </div>
 
   )
