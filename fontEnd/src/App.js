@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import Blog from './components/Blog'
 import AddForm from './components/addForm'
-import Togglable from './components/Togglable'
 import Users from './components/Users'
 import User from './components/User'
 import SingleBlog from './components/singleBlog'
@@ -59,13 +58,6 @@ const App = () => {
     dispatch(setBlogs(blogObject))
   }
 
-  const createBlog = () => {
-    return (
-      <Togglable buttonLabel='创建新博客'>
-        <AddForm createBlog={addBlog} />
-      </Togglable>
-    )
-  }
   const handleLikes = (id, likes) => {
     if (loggedUser) {
       dispatch(addlike(id, likes + 1))
@@ -105,7 +97,6 @@ const App = () => {
           </Route>
           <Route path='/'>
             <Blog />
-            {/* {loggedUser ? createBlog() : null} */}
           </Route>
         </Switch>
       </div>
