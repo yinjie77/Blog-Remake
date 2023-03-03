@@ -8,7 +8,7 @@ const AddForm = ({ createBlog }) => {
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const [value, setValue] = React.useState(``);
+  const [value, setValue] = useState(``);
 
   const addBlog = () => {
 

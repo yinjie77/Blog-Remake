@@ -190,6 +190,60 @@ h1 {
   opacity: 0.8;
 }
 
+/* blog */
+.drawerBtn {
+  color: #fff !important;
+  background: #5c64a4 !important;
+  border-color: #5c64a4 !important;
+}
+
+.drawerBtn:hover {
+  border-color: #5c64a4 !important;
+  opacity: 0.5;
+}
+
+.blogBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.directory {
+  align-self: flex-start;
+}
+
+.blogContent {
+  width: 90vw;
+}
+
+.likeBtn {
+  margin-left: 1vw;
+  background: #5c64a4 !important;
+  color: #fff !important;
+}
+
+.blogAuthor {
+  font-size: 1.2em;
+  color: #5c64a4;
+}
+
+.blogComments {
+  width: 90vw;
+}
+
+.commentBtn {
+  color: #fff !important;
+  background: #5c64a4 !important;
+  border-color: #5c64a4 !important;
+  margin-bottom: 2vh;
+}
+
+.commentBtn:hover {
+  border-color: #5c64a4 !important;
+  opacity: 0.8;
+}
+
 /* footer */
 .footer {
   width: 100%;
