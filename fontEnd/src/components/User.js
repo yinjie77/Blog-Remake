@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { List, Card, Popconfirm, Button, Skeleton, message } from 'antd';
 import { LikeOutlined, MessageOutlined, QuestionCircleOutlined } from '@ant-design/icons';
-const User = ({ user, deleteBlog }) => {
+const User = ({ user, deleteBlog, loggedUser }) => {
     const dispatch = useDispatch()
     const handleRemoving = async (blog) => {
         dispatch(deleteBlog(blog.id))
@@ -39,21 +39,23 @@ const User = ({ user, deleteBlog }) => {
                                             <span className='likes'> <LikeOutlined /> {item.likes}</span>
                                             <span > <MessageOutlined /> {item.comments.length}</span>
                                         </div>
-                                        <Popconfirm
-                                            title="你确定要删除这个博客吗"
-                                            onConfirm={() => handleRemoving(item)}
-                                            okText="是"
-                                            cancelText="否"
-                                            icon={
-                                                <QuestionCircleOutlined
-                                                    style={{
-                                                        color: 'red',
-                                                    }}
-                                                />
-                                            }
-                                        >
-                                            <Button className='deleteBtn'>删除</Button>
-                                        </Popconfirm>
+                                        {
+                                            loggedUser.id === user.id ? <Popconfirm
+                                                title="你确定要删除这个博客吗"
+                                                onConfirm={() => handleRemoving(item)}
+                                                okText="是"
+                                                cancelText="否"
+                                                icon={
+                                                    <QuestionCircleOutlined
+                                                        style={{
+                                                            color: 'red',
+                                                        }}
+                                                    />
+                                                }
+                                            >
+                                                <Button className='deleteBtn'>删除</Button>
+                                            </Popconfirm> : null
+                                        }
                                     </div>
 
                                 </Card>

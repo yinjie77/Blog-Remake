@@ -79,7 +79,7 @@ const App = () => {
       <div>
         <Switch>
           <Route path="/users/:id">
-            <User user={user} deleteBlog={deleteBlog} />
+            <User user={user} deleteBlog={deleteBlog} loggedUser={loggedUser} />
           </Route>
           <Route path='/users'>
             <Users users={users} />
