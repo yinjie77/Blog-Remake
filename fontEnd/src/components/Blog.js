@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { List, Skeleton, Avatar, Space, Button, Modal } from 'antd';
+import { List, Skeleton, Avatar, Space, Button, Input } from 'antd';
 import { LikeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
+const { Search } = Input;
 
 const Blog = () => {
-
   const blogs = useSelector(state => state.blogs)
   blogs.sort((a, b) => (a.likes > b.likes ? -1 : 1))
   blogs.forEach((item, index) => {
@@ -13,7 +13,9 @@ const Blog = () => {
     item.avatar = `https://joesch.moe/api/v1/random?key=${index}`
     item.description = '简介：暂无'
   })
+  const handleSearch = (value) => {
 
+  }
   const IconText = ({ icon, text }) => (
     <Space>
       {React.createElement(icon)}
@@ -28,6 +30,16 @@ const Blog = () => {
         <Skeleton active paragraph={{ rows: 10 }} />
         :
         <>
+          <div className='blogSearch'>
+            <Search
+              placeholder="搜索文章"
+              onSearch={handleSearch}
+              allowClear
+              style={{
+                width: 200,
+              }}
+            />
+          </div>
           <Link to='/addblog'>
             <Button type="primary" block shape='round' className='addBlogBtn' >
               发布新博客

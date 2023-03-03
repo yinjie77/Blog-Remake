@@ -145,6 +145,11 @@
   border: none !important;
 }
 
+.blogSearch {
+  margin-left: 1vw;
+  margin-bottom: 2vh;
+}
+
 /* users */
 h1 {
   text-align: center;
