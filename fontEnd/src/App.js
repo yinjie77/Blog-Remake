@@ -68,11 +68,6 @@ const App = () => {
       message.error('请先登录')
 
   }
-  const handleRemoving = async (blog) => {
-    dispatch(deleteBlog(blog.id))
-    message.success('删除成功')
-    location.replace('/')
-  }
 
   return (
     <div >
@@ -84,13 +79,13 @@ const App = () => {
       <div>
         <Switch>
           <Route path="/users/:id">
-            <User user={user} />
+            <User user={user} deleteBlog={deleteBlog} />
           </Route>
           <Route path='/users'>
             <Users users={users} />
           </Route>
           <Route path='/blogs/:id'>
-            <SingleBlog handleLikes={handleLikes} handleRemoving={handleRemoving} loggedUser={loggedUser} />
+            <SingleBlog handleLikes={handleLikes} loggedUser={loggedUser} />
           </Route>
           <Route path='/addblog'>
             <AddForm createBlog={addBlog} />

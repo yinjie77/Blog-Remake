@@ -156,8 +156,38 @@ h1 {
   font-size: 1.5em;
 }
 
-.table{
+.table {
   padding: 0 1vw !important;
+}
+
+/* user */
+.blogName {
+  color: #5c64a4;
+}
+
+.blogName:hover {
+  color: #5c64a4;
+  opacity: 0.8;
+}
+
+.cardContnet {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardContnet .likes {
+  padding: 0 20px;
+}
+
+.deleteBtn {
+  border-color: #5c64a4;
+  background: #5c64a4 !important;
+  color: #fff !important;
+}
+
+.deleteBtn:hover {
+  border-color: #5c64a4 !important;
+  opacity: 0.8;
 }
 
 /* footer */
