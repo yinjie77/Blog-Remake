@@ -35,7 +35,7 @@ const Users = ({ users }) => {
                     style={{
                         marginBottom: 8,
                         display: 'block',
-                        borderColor: '#5c64a4' 
+                        borderColor: '#5c64a4'
                     }}
                 />
                 <Space>
@@ -230,7 +230,7 @@ const Users = ({ users }) => {
 
             <h1 >用户信息统计</h1>
             <div >
-                <Table columns={columns} dataSource={users} bordered={true} loading={users.length == 0} />
+                <Table columns={columns} dataSource={users} bordered={true} loading={users.length == 0} className='table' />
             </div>
         </div>
     )
