@@ -55,7 +55,7 @@ const App = () => {
   }, [dispatch])
 
   const addBlog = (blogObject, title) => {
-    dispatch(setBlogs(blogObject))
+    return dispatch(setBlogs(blogObject))
   }
 
   const handleLikes = (id, likes) => {
@@ -63,10 +63,8 @@ const App = () => {
       dispatch(addlike(id, likes + 1))
       message.success('点赞成功')
     }
-
     else
       message.error('请先登录')
-
   }
 
   return (

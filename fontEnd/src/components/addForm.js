@@ -3,27 +3,35 @@ import { Form, Input, Button, message } from 'antd';
 import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
+import { useDispatch } from 'react-redux'
+import { setLoggedUser } from '../reducer/loggedUserReducer';
 
 const AddForm = ({ createBlog }) => {
-
+  const dispatch = useDispatch()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [value, setValue] = useState(``);
 
   const addBlog = () => {
 
-    createBlog(
+    let res = createBlog(
       {
         title: title,
         author: author,
         url: value
       }
     )
-    setTitle('')
-    setAuthor('')
-    setValue('')
-    location.replace('/')
-    message.success('创建成功')
+    res.then(() => {
+      setTitle('')
+      setAuthor('')
+      setValue('')
+      message.success('创建成功')
+      location.replace('/')
+    }, () => {
+      message.error('请重新登录，注意做好备份')
+      window.localStorage.removeItem('loggedBlogappUser')
+      dispatch(setLoggedUser(null))
+    })
   }
   return (
     <div
