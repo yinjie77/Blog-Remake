@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { List, Skeleton, Avatar, Space, Button, Input } from 'antd';
+import { List, Skeleton, Avatar, Space, Button, Input, notification } from 'antd';
 import { LikeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 const { Search } = Input;
 
-const Blog = () => {
+const Blog = ({ loggedUser }) => {
   const blogs = useSelector(state => state.blogs)
   blogs.sort((a, b) => (a.likes > b.likes ? -1 : 1))
   blogs.forEach((item, index) => {
@@ -23,6 +23,12 @@ const Blog = () => {
     </Space>
   );
 
+  const openNotification = () => {
+    notification.error({
+      message: '请先登录再发布',
+      placement: 'topLeft'
+    });
+  };
   return (
     <div >
       <div className='contentHeadText'>博客</div>
@@ -40,11 +46,17 @@ const Blog = () => {
               }}
             />
           </div>
-          <Link to='/addblog'>
-            <Button type="primary" block shape='round' className='addBlogBtn' >
+          {loggedUser ?
+            <Link to='/addblog'>
+              <Button type="primary" block shape='round' className='addBlogBtn' >
+                发布新博客
+              </Button>
+            </Link> :
+            <Button type="primary" block shape='round' className='addBlogBtn' onClick={openNotification}>
               发布新博客
             </Button>
-          </Link>
+          }
+
           <List
             itemLayout="vertical"
             size="large"

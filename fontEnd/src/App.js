@@ -91,7 +91,7 @@ const App = () => {
             <AddForm createBlog={addBlog} />
           </Route>
           <Route path='/'>
-            <Blog />
+            <Blog loggedUser={loggedUser} />
           </Route>
         </Switch>
       </div>
