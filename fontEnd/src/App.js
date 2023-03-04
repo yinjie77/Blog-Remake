@@ -83,7 +83,7 @@ const App = () => {
             <Users users={users} />
           </Route>
           <Route path='/blogs/:id'>
-            <SingleBlog handleLikes={handleLikes} loggedUser={loggedUser} />
+            <SingleBlog handleLikes={handleLikes} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
           </Route>
           <Route path='/addblog'>
             <AddForm createBlog={addBlog} setLoggedUser={setLoggedUser} />

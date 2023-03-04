@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { makeComment } from '../reducer/blogReducer'
+import { makeComment, addlike } from '../reducer/blogReducer'
 import { Button, Card, List, Input, message, Affix, Drawer, Avatar } from 'antd';
 import { LikeOutlined, UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';     // 解析 markdown
@@ -10,7 +10,7 @@ import MarkNav from 'markdown-navbar';          // markdown 目录
 import 'markdown-navbar/dist/navbar.css';
 const { TextArea } = Input;
 
-const SingleBlog = ({ handleLikes, loggedUser }) => {
+const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     //目录状态
     const [open, setOpen] = useState(false);
     const showDrawer = () => {
@@ -21,23 +21,55 @@ const SingleBlog = ({ handleLikes, loggedUser }) => {
     };
 
     const [comment, setComment] = useState('')
-    
+
     const dispatch = useDispatch()
     const blogs = useSelector(state => state.blogs)
     const id = useParams().id
     const blog = blogs.find((blog) => blog.id === id)
 
-    
+
     const handleComment = (e) => {
-        if (comment == '') message.error('请输入评论')
-        if (loggedUser) {
-            dispatch(makeComment(comment, blog.id))
-            setComment('')
+        if (comment == '') {
+            message.error('请输入评论')
+            return
         }
-        else
+        if (loggedUser) {
+            let res = dispatch(makeComment(comment, blog.id))
+            res.then(() => {
+                message.success('评论成功')
+            }, () => {
+                message.error('身份失效，请重新登录')
+                window.localStorage.removeItem('loggedBlogappUser')
+                dispatch(setLoggedUser(null))
+                location.reload()
+            })
+        }
+        else {
             message.error('请先登录')
+        }
 
     }
+
+    const handleLikes = (id, likes) => {
+        //两种保障
+        if (loggedUser) {
+            let res = dispatch(addlike(id, likes + 1))
+            res.then(() => {
+                message.success('点赞成功')
+            }, () => {
+                message.error('身份失效，请重新登录')
+                window.localStorage.removeItem('loggedBlogappUser')
+                dispatch(setLoggedUser(null))
+                location.reload()
+            })
+
+        }
+        else {
+            message.error('请先登录')
+        }
+
+    }
+
     if (!blog)
         return null
 

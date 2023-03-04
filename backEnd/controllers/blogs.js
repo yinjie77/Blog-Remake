@@ -67,6 +67,21 @@ blogsRouter.delete("/:id", async (request, response) => {
 })
 
 blogsRouter.patch("/:id", async (request, response) => {
+
+	const token = request.token
+	let decodedToken
+	try {
+		decodedToken = jwt.verify(token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
+
+	if (!token || !decodedToken) {
+		return response.status(401).json({
+			error: "token missing or invalid"
+		})
+	}
+
 	const id = request.params.id
 
 	if (request.body.likes) {
@@ -81,6 +96,21 @@ blogsRouter.patch("/:id", async (request, response) => {
 	}
 })
 blogsRouter.post("/:id/comments", async (request, response) => {
+
+	const token = request.token
+	let decodedToken
+	try {
+		decodedToken = jwt.verify(token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
+
+	if (!token || !decodedToken) {
+		return response.status(401).json({
+			error: "token missing or invalid"
+		})
+	}
+
 	const id = request.params.id
 
 	if (request.body.comment) {

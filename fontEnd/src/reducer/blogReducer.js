@@ -49,18 +49,23 @@ export const setBlogs = (blogObject) => {
 }
 export const addlike = (id, likes) => {
   return async dispatch => {
-    await blogService.updateBlog({
-      id,
-      likes
-    })
-
-    dispatch({
-      type: 'LIKE_BLOG',
-      data: {
+    try {
+      await blogService.updateBlog({
         id,
         likes
-      }
-    })
+      })
+
+      dispatch({
+        type: 'LIKE_BLOG',
+        data: {
+          id,
+          likes
+        }
+      })
+    } catch (error) {
+      throw new Error('token过期')
+    }
+
   }
 }
 export const deleteBlog = (id) => {
@@ -84,16 +89,21 @@ export const deleteBlog = (id) => {
 }
 export const makeComment = (comment, id) => {
   return async dispatch => {
-    const blog = await blogService.makeComment(
-      comment,
-      id
-    )
-    dispatch({
-      type: 'MAKE_COMMENT',
-      data: {
-        blog
-      }
-    })
+    try {
+      const blog = await blogService.makeComment(
+        comment,
+        id
+      )
+      dispatch({
+        type: 'MAKE_COMMENT',
+        data: {
+          blog
+        }
+      })
+    } catch (error) {
+      throw new Error('token过期')
+    }
+
   }
 }
 export default blogReducer
