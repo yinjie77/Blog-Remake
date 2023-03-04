@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux'
 import { setLoggedUser } from '../reducer/loggedUserReducer';
 import LoginForm from './LoginForm';
 import CreateAccount from './CreateAccount';
-
-import { Modal } from 'antd';
+import loginService from '../services/login'
+import blogService from '../services/blogs'
+import { Modal, message } from 'antd';
 import { useState } from 'react';
 
 export default function Head({ loggedUser }) {
@@ -34,6 +35,20 @@ export default function Head({ loggedUser }) {
     const move = () => {
         document.body.scrollTop = document.documentElement.scrollTop = 450
     }
+
+    const login = async (username, password) => {
+        const user = await loginService.login({
+            username, password
+        })
+        window.localStorage.setItem(
+            'loggedBlogappUser', JSON.stringify(user)
+        )
+        blogService.setToken(user.token)
+        dispatch(setLoggedUser(user))
+        message.success('登陆成功')
+        location.replace('/')
+    }
+    
     return (
         <div className='head'>
             <YahooOutlined className='headIcon' />
@@ -60,15 +75,15 @@ export default function Head({ loggedUser }) {
                 </div>
             }
             <Modal
-                
+
                 style={{ maxWidth: '400px', textAlign: 'center' }}
                 title={modalState}
                 open={isModalVisible}
                 footer={false}
                 onCancel={handleModalCancel}
             >
-                {modalState === '登录' && <LoginForm setModalState={setModalState} />}
-                {modalState === '注册' && <CreateAccount setModalState={setModalState} />}
+                {modalState === '登录' && <LoginForm setModalState={setModalState} login={login} />}
+                {modalState === '注册' && <CreateAccount setModalState={setModalState} login={login} />}
 
             </Modal>
         </div>
