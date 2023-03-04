@@ -36,10 +36,10 @@ export default function Head({ loggedUser }) {
         document.body.scrollTop = document.documentElement.scrollTop = 450
     }
 
-    const login = async (username, password) => {
+    const login = async (username, password, noLogin) => {
         try {
             const user = await loginService.login({
-                username, password
+                username, password, noLogin
             })
             window.localStorage.setItem(
                 'loggedBlogappUser', JSON.stringify(user)

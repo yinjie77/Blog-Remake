@@ -2,13 +2,17 @@ import React from "react"
 import { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Checkbox } from 'antd';
 const LoginForm = (props) => {
   const [username, setUsersname] = useState('')
   const [password, setPassword] = useState('')
-  const handleLogin =  () => {
-    props.login(username, password)
+  const [noLogin, setNoLogin] = useState(false)
+  const handleLogin = () => {
+    props.login(username, password, noLogin)
   }
+  const handleNoLogin = () => [
+    setNoLogin(!noLogin)
+  ]
   return (
     <div
       style={{
@@ -48,7 +52,9 @@ const LoginForm = (props) => {
             }}
           />
         </Form.Item>
-
+        <Form.Item>
+          <Checkbox onChange={handleNoLogin}>7天内免登录</Checkbox>
+        </Form.Item>
         <Form.Item>
           <Button
             type="primary"
