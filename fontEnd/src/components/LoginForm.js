@@ -6,14 +6,8 @@ import { Form, Input, Button, message } from 'antd';
 const LoginForm = (props) => {
   const [username, setUsersname] = useState('')
   const [password, setPassword] = useState('')
-  const handleLogin = async () => {
-
-    try {
-      props.login(username, password)
-    } catch (error) {
-      message.error('账号或密码错误')
-    }
-
+  const handleLogin =  () => {
+    props.login(username, password)
   }
   return (
     <div

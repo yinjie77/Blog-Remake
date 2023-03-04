@@ -37,18 +37,23 @@ export default function Head({ loggedUser }) {
     }
 
     const login = async (username, password) => {
-        const user = await loginService.login({
-            username, password
-        })
-        window.localStorage.setItem(
-            'loggedBlogappUser', JSON.stringify(user)
-        )
-        blogService.setToken(user.token)
-        dispatch(setLoggedUser(user))
-        message.success('登陆成功')
-        location.replace('/')
+        try {
+            const user = await loginService.login({
+                username, password
+            })
+            window.localStorage.setItem(
+                'loggedBlogappUser', JSON.stringify(user)
+            )
+            blogService.setToken(user.token)
+            dispatch(setLoggedUser(user))
+            message.success('登陆成功')
+            location.replace('/')
+        } catch (error) {
+            message.error('账号或密码错误')
+        }
+
     }
-    
+
     return (
         <div className='head'>
             <YahooOutlined className='headIcon' />
