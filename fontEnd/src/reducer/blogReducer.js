@@ -65,16 +65,21 @@ export const addlike = (id, likes) => {
 }
 export const deleteBlog = (id) => {
   return async dispatch => {
-    await blogService.removeBlog({
-      id
-    })
-
-    dispatch({
-      type: 'DELETE_BLOG',
-      data: {
+    try {
+      await blogService.removeBlog({
         id
-      }
-    })
+      })
+
+      dispatch({
+        type: 'DELETE_BLOG',
+        data: {
+          id
+        }
+      })
+    } catch (error) {
+      throw new Error('token过期')
+    }
+
   }
 }
 export const makeComment = (comment, id) => {

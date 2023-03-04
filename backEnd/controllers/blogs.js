@@ -40,8 +40,13 @@ blogsRouter.post('/', async (request, response, next) => {
 })
 blogsRouter.delete("/:id", async (request, response) => {
 	const token = request.token
+	let decodedToken
+	try {
+		decodedToken = jwt.verify(token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
 
-	const decodedToken = jwt.verify(token, process.env.SECRET)
 	if (!token || !decodedToken) {
 		return response.status(401).json({
 			error: "token missing or invalid"

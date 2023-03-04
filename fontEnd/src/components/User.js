@@ -3,12 +3,21 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { List, Card, Popconfirm, Button, Skeleton, message } from 'antd';
 import { LikeOutlined, MessageOutlined, QuestionCircleOutlined } from '@ant-design/icons';
-const User = ({ user, deleteBlog, loggedUser }) => {
+
+const User = ({ user, deleteBlog, loggedUser, setLoggedUser }) => {
     const dispatch = useDispatch()
     const handleRemoving = async (blog) => {
-        dispatch(deleteBlog(blog.id))
-        message.success('删除成功')
-        location.reload()
+        let res = dispatch(deleteBlog(blog.id))
+        res.then(() => {
+            message.success('删除成功')
+            location.reload()
+        }, () => {
+            message.error('身份失效，请重新登录')
+            window.localStorage.removeItem('loggedBlogappUser')
+            dispatch(setLoggedUser(null))
+            location.replace('/')
+        })
+
     }
     return (
 
@@ -18,7 +27,7 @@ const User = ({ user, deleteBlog, loggedUser }) => {
                     <Skeleton active paragraph={{ rows: 10 }} /> :
                     <div>
                         {
-                            loggedUser.id === user.id ?
+                            loggedUser?.id === user.id ?
                                 <h1>个人中心</h1> :
                                 <h1>{user.name}的博客</h1>
                         }
@@ -45,7 +54,7 @@ const User = ({ user, deleteBlog, loggedUser }) => {
                                                 <span > <MessageOutlined /> {item.comments.length}</span>
                                             </div>
                                             {
-                                                loggedUser.id === user.id ? <Popconfirm
+                                                loggedUser?.id === user.id ? <Popconfirm
                                                     title="你确定要删除这个博客吗"
                                                     onConfirm={() => handleRemoving(item)}
                                                     okText="是"

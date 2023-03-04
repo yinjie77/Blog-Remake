@@ -77,7 +77,7 @@ const App = () => {
       <div>
         <Switch>
           <Route path="/users/:id">
-            <User user={user} deleteBlog={deleteBlog} loggedUser={loggedUser} />
+            <User user={user} deleteBlog={deleteBlog} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
           </Route>
           <Route path='/users'>
             <Users users={users} />
@@ -86,7 +86,7 @@ const App = () => {
             <SingleBlog handleLikes={handleLikes} loggedUser={loggedUser} />
           </Route>
           <Route path='/addblog'>
-            <AddForm createBlog={addBlog} />
+            <AddForm createBlog={addBlog} setLoggedUser={setLoggedUser} />
           </Route>
           <Route path='/'>
             <Blog loggedUser={loggedUser} />

@@ -4,9 +4,8 @@ import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import { useDispatch } from 'react-redux'
-import { setLoggedUser } from '../reducer/loggedUserReducer';
 
-const AddForm = ({ createBlog }) => {
+const AddForm = ({ createBlog, setLoggedUser }) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
