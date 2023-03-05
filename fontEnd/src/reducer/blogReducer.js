@@ -1,8 +1,16 @@
 import blogService from '../services/blogs'
+let blogs
 const blogReducer = (state = [], action) => {
   switch (action.type) {
     case 'INI_BLOG': {
+      blogs = action.data.blogs
       return action.data.blogs
+    }
+    case 'SEARCH_BLOG': {
+      return blogs.filter(blog => blog.title.toLowerCase().includes(action.data.toLowerCase()))
+    }
+    case 'RESET_BLOG': {
+      return blogs
     }
     case 'ADD_BLOG': {
       return [...state, action.data.blog]
@@ -19,7 +27,17 @@ const blogReducer = (state = [], action) => {
     default: return state
   }
 }
-
+export const searchBlogs = (value) => {
+  return {
+    type: 'SEARCH_BLOG',
+    data: value
+  }
+}
+export const resetBlog = () => {
+  return {
+    type: 'RESET_BLOG'
+  }
+}
 export const initializeBlogs = () => {
   return async dispatch => {
     const blogs = await blogService.getAll()

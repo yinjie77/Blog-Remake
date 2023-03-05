@@ -3,6 +3,7 @@ import { YahooOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setLoggedUser } from '../reducer/loggedUserReducer';
+import { resetBlog } from '../reducer/blogReducer';
 import LoginForm from './LoginForm';
 import CreateAccount from './CreateAccount';
 import loginService from '../services/login'
@@ -33,6 +34,7 @@ export default function Head({ loggedUser }) {
     };
 
     const move = () => {
+        dispatch(resetBlog())
         document.body.scrollTop = document.documentElement.scrollTop = 450
     }
 

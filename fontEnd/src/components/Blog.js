@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { List, Skeleton, Avatar, Space, Button, Input, notification } from 'antd';
 import { LikeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
+import { searchBlogs } from '../reducer/blogReducer';
 const { Search } = Input;
 
 const Blog = ({ loggedUser }) => {
+  const dispatch = useDispatch()
   const blogs = useSelector(state => state.blogs)
   blogs.sort((a, b) => (a.likes > b.likes ? -1 : 1))
   blogs.forEach((item, index) => {
@@ -14,7 +16,7 @@ const Blog = ({ loggedUser }) => {
     item.description = '简介：暂无'
   })
   const handleSearch = (value) => {
-
+    dispatch(searchBlogs(value))
   }
   const IconText = ({ icon, text }) => (
     <Space>
