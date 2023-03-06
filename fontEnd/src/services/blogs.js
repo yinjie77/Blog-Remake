@@ -11,11 +11,11 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-const create=async newObjcet=>{
-  const config={
-    headers:{Authorization:token}
+const create = async newObjcet => {
+  const config = {
+    headers: { Authorization: token }
   }
-  const response=await axios.post(baseUrl,newObjcet,config)
+  const response = await axios.post(baseUrl, newObjcet, config)
   return response.data
 }
 const updateBlog = async blog => {
@@ -23,18 +23,21 @@ const updateBlog = async blog => {
     headers: { Authorization: token }
   }
 
-  const response = await axios.patch(`${baseUrl}/${blog.id}`,{ likes: blog.likes },header)
+  const response = await axios.patch(`${baseUrl}/${blog.id}`, { likes: blog.likes }, header)
   return response.data
 }
 const removeBlog = async blog => {
-  const header  = {
+  const header = {
     headers: { Authorization: token }
   }
-  await axios.delete(`${baseUrl}/${blog.id}`,header)
+  await axios.delete(`${baseUrl}/${blog.id}`, header)
 }
 
-const makeComment = async (comment,id) => {
-  const response = await axios.post(`${baseUrl}/${id}/comments`,{ comment })
+const makeComment = async (comment, id) => {
+  const header = {
+    headers: { Authorization: token }
+  }
+  const response = await axios.post(`${baseUrl}/${id}/comments`, { comment }, header)
   return response.data
 }
-export default { getAll ,create,setToken,updateBlog,removeBlog,makeComment}
+export default { getAll, create, setToken, updateBlog, removeBlog, makeComment }

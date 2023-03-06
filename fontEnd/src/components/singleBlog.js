@@ -36,6 +36,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
         if (loggedUser) {
             let res = dispatch(makeComment(comment, blog.id))
             res.then(() => {
+                setComment('')
                 message.success('评论成功')
             }, () => {
                 message.error('身份失效，请重新登录')
