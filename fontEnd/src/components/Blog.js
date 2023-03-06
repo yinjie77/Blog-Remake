@@ -34,9 +34,6 @@ const Blog = ({ loggedUser }) => {
   return (
     <div >
       <div className='contentHeadText'>博客</div>
-      {blogs.length == 0 ?
-        <Skeleton active paragraph={{ rows: 10 }} />
-        :
         <>
           <div className='blogSearch'>
             <Search
@@ -94,7 +91,7 @@ const Blog = ({ loggedUser }) => {
             )}
           />
         </>
-      }
+      
     </div>
 
   )
