@@ -23,7 +23,7 @@ const updateBlog = async blog => {
     headers: { Authorization: token }
   }
 
-  const response = await axios.patch(`${baseUrl}/${blog.id}`, { likes: blog.likes }, header)
+  const response = await axios.patch(`${baseUrl}/${blog.id}`, { useName: blog.useName }, header)
   return response.data
 }
 const removeBlog = async blog => {

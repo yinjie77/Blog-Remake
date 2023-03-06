@@ -9,7 +9,7 @@ const { Search } = Input;
 const Blog = ({ loggedUser }) => {
   const dispatch = useDispatch()
   const blogs = useSelector(state => state.blogs)
-  blogs.sort((a, b) => (a.likes > b.likes ? -1 : 1))
+  blogs.sort((a, b) => (a.likes.length > b.likes.length ? -1 : 1))
   blogs.forEach((item, index) => {
     //avatar,description,content
     item.avatar = `https://joesch.moe/api/v1/random?key=${index}`
@@ -73,7 +73,7 @@ const Blog = ({ loggedUser }) => {
                 key={item.id}
                 actions={[
                   <IconText icon={UserOutlined} text={item.author} key="list-vertical-like-o" />,
-                  <IconText icon={LikeOutlined} text={item.likes} key="list-vertical-like-o" />,
+                  <IconText icon={LikeOutlined} text={item.likes.length} key="list-vertical-like-o" />,
                   <IconText icon={MessageOutlined} text={item.comments.length} key="list-vertical-message" />,
                 ]}
                 extra={

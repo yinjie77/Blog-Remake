@@ -51,19 +51,22 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
 
     }
 
-    const handleLikes = (id, likes) => {
+    const handleLikes = (id) => {
         //两种保障
         if (loggedUser) {
-            let res = dispatch(addlike(id, likes + 1))
-            res.then(() => {
-                message.success('点赞成功')
-            }, () => {
-                message.error('身份失效，请重新登录')
-                window.localStorage.removeItem('loggedBlogappUser')
-                dispatch(setLoggedUser(null))
-                location.reload()
-            })
-
+            if (blog.likes.includes(loggedUser.username)) {
+                message.error('已经点赞过了')
+            } else {
+                let res = dispatch(addlike(id, loggedUser.username))
+                res.then(() => {
+                    message.success('点赞成功')
+                }, () => {
+                    message.error('身份失效，请重新登录')
+                    window.localStorage.removeItem('loggedBlogappUser')
+                    dispatch(setLoggedUser(null))
+                    location.reload()
+                })
+            }
         }
         else {
             message.error('请先登录')
@@ -99,7 +102,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                             className="toc-list"
                             source={blog.url}
                             ordered={true}
-                            headingTopOffset={-490}
+                            headingTopOffset={-450}
                         />
                     </Drawer>
                 </div>
@@ -122,9 +125,9 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                         actions={[
                             <div>
                                 <span>
-                                    <LikeOutlined />{blog.likes}
+                                    <LikeOutlined />{blog.likes.length}
                                 </span>
-                                <Button onClick={() => handleLikes(blog.id, blog.likes)} className='likeBtn'>
+                                <Button onClick={() => handleLikes(blog.id)} className='likeBtn'>
                                     点赞
                                 </Button>
                             </div>

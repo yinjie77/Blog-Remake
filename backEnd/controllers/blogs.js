@@ -24,10 +24,7 @@ blogsRouter.post('/', async (request, response, next) => {
 	}
 	const user = await User.findById(decodedToken.id)
 
-	if (blog.likes === undefined) {
-		blog.likes = 0
-	}
-	else if (blog.url === undefined || blog.title === undefined) {
+	if (blog.url === undefined || blog.title === undefined) {
 		return response.status(400).json({ error: "title or url is missing" })
 	}
 	blog.user = user._id
@@ -82,19 +79,10 @@ blogsRouter.patch("/:id", async (request, response) => {
 			error: "token missing or invalid"
 		})
 	}
-
 	const id = request.params.id
-
-	if (request.body.likes) {
-		const blog = {
-			likes: request.body.likes
-		}
-		const updatedBlog = await Blog.findByIdAndUpdate(id, blog, { new: true })
-		response.json(updatedBlog)
-	}
-	else {
-		response.status(400).send({ error: "Likes property is missing" })
-	}
+	const userName = request.body.useName
+	const updatedBlog = await Blog.findByIdAndUpdate(id, { $addToSet: { likes: userName } })
+	response.json(updatedBlog)
 })
 blogsRouter.post("/:id/comments", async (request, response) => {
 
@@ -116,9 +104,7 @@ blogsRouter.post("/:id/comments", async (request, response) => {
 
 	if (request.body.comment) {
 		const blog = await Blog.
-			findByIdAndUpdate(id, { ["$addToSet"]: { comments: request.body.comment } },
-				{ new: true }
-			)
+			findByIdAndUpdate(id, { ["$addToSet"]: { comments: request.body.comment } })
 		response.json(blog)
 	}
 	else {

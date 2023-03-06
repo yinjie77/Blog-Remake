@@ -50,7 +50,7 @@ const User = ({ user, deleteBlog, loggedUser, setLoggedUser }) => {
                                     >
                                         <div className='cardContnet'>
                                             <div >
-                                                <span className='likes'> <LikeOutlined /> {item.likes}</span>
+                                                <span className='likes'> <LikeOutlined /> {item.likes.length}</span>
                                                 <span > <MessageOutlined /> {item.comments.length}</span>
                                             </div>
                                             {

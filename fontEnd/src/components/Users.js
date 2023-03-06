@@ -126,10 +126,10 @@ const Users = ({ users }) => {
     //用户状态
     users.forEach((item) => {
         let comments = item.blogs.reduce((pre, cur) => pre + cur.comments.length, 0)
-        let likes = item.blogs.reduce((pre, cur) => pre + cur.likes, 0)
-        if (likes > 50 || comments > 10) {
+        let likes = item.blogs.reduce((pre, cur) => pre + cur.likes.length, 0)
+        if (likes > 5 || comments > 5) {
             item.status = '火爆'
-        } else if (likes > 10 || comments > 2) {
+        } else if (likes > 1 || comments > 2) {
             item.status = '活跃'
         } else {
             item.status = '沉寂'
@@ -159,7 +159,7 @@ const Users = ({ users }) => {
             dataIndex: 'blogs',
             className: 'TableText',
             render: (text) => {
-                let likes = text.reduce((pre, cur) => pre + cur.likes, 0)
+                let likes = text.reduce((pre, cur) => pre + cur.likes.length, 0)
                 return (
                     <div>{likes}</div>
                 )
