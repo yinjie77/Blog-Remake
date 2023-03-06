@@ -9,7 +9,3 @@
 打包文件到build文件夹
 
 
-
-## Tips
-
-jest和cypress没配置完全
