@@ -24,8 +24,8 @@ const AddForm = ({ createBlog, setLoggedUser }) => {
       setTitle('')
       setAuthor('')
       setValue('')
-      message.success('创建成功')
       location.replace('/')
+      message.success('创建成功')
     }, () => {
       message.error('请重新登录，注意做好备份')
       window.localStorage.removeItem('loggedBlogappUser')
