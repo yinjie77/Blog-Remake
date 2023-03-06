@@ -4,7 +4,7 @@ const blogReducer = (state = [], action) => {
   switch (action.type) {
     case 'INI_BLOG': {
       blogs = action.data.blogs
-      return action.data.blogs
+      return blogs
     }
     case 'SEARCH_BLOG': {
       return blogs.filter(blog => blog.title.toLowerCase().includes(action.data.toLowerCase()))
@@ -13,16 +13,20 @@ const blogReducer = (state = [], action) => {
       return blogs
     }
     case 'ADD_BLOG': {
-      return [...state, action.data.blog]
+      blogs = [...state, action.data.blog]
+      return blogs
     }
     case 'LIKE_BLOG': {
-      return state.map(blog => blog.id === action.data.id ? { ...blog, likes: action.data.likes } : blog)
+      blogs = state.map(blog => blog.id === action.data.id ? { ...blog, likes: action.data.likes } : blog)
+      return blogs
     }
     case 'DELETE_BLOG': {
-      return state.filter(blog => blog.id !== action.data.id)
+      blogs = state.filter(blog => blog.id !== action.data.id)
+      return blogs
     }
     case 'MAKE_COMMENT': {
-      return state.map(blog => blog.id === action.data.blog.id ? action.data.blog : blog)
+      blogs = state.map(blog => blog.id === action.data.blog.id ? action.data.blog : blog)
+      return blogs
     }
     default: return state
   }
