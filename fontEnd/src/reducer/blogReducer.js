@@ -25,7 +25,7 @@ const blogReducer = (state = [], action) => {
       return blogs
     }
     case 'MAKE_COMMENT': {
-      blogs = state.map(blog => blog.id === action.data.blog.id ? action.data.blog : blog)
+      blogs = state.map(blog => blog.id === action.data.id ? { ...blog, comments: [...blog.comments, action.data.comment] } : blog)
       return blogs
     }
     default: return state
@@ -119,7 +119,8 @@ export const makeComment = (comment, id) => {
       dispatch({
         type: 'MAKE_COMMENT',
         data: {
-          blog
+          id,
+          comment
         }
       })
     } catch (error) {

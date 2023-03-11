@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { makeComment, addlike } from '../reducer/blogReducer'
+import { addLike2, addComment2 } from '../reducer/usersReducer'
 import { Button, Card, List, Input, message, Affix, Drawer, Avatar } from 'antd';
 import { LikeOutlined, UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';     // 解析 markdown
@@ -36,6 +37,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
         if (loggedUser) {
             let res = dispatch(makeComment(comment, blog.id))
             res.then(() => {
+                dispatch(addComment2(blog.id, comment))
                 setComment('')
                 message.success('评论成功')
             }, () => {
@@ -59,6 +61,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
             } else {
                 let res = dispatch(addlike(id, loggedUser.username))
                 res.then(() => {
+                    dispatch(addLike2(id, loggedUser.username))
                     message.success('点赞成功')
                 }, () => {
                     message.error('身份失效，请重新登录')
