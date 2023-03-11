@@ -9,8 +9,8 @@ const User = ({ user, deleteBlog, loggedUser, setLoggedUser }) => {
     const handleRemoving = async (blog) => {
         let res = dispatch(deleteBlog(blog.id))
         res.then(() => {
-            message.success('删除成功')
             location.reload()
+            message.success('删除成功')
         }, () => {
             message.error('身份失效，请重新登录')
             window.localStorage.removeItem('loggedBlogappUser')

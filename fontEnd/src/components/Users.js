@@ -127,9 +127,10 @@ const Users = ({ users }) => {
     users.forEach((item) => {
         let comments = item.blogs.reduce((pre, cur) => pre + cur.comments.length, 0)
         let likes = item.blogs.reduce((pre, cur) => pre + cur.likes.length, 0)
-        if (likes > 5 || comments > 5) {
+        let star=comments+likes*2
+        if (star>7) {
             item.status = '火爆'
-        } else if (likes > 1 || comments > 2) {
+        } else if (star>4) {
             item.status = '活跃'
         } else {
             item.status = '沉寂'
