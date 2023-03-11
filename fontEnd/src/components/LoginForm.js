@@ -1,15 +1,16 @@
 import React from "react"
 import { useState } from "react"
-import { useDispatch } from 'react-redux'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Form, Input, Button, message, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 const LoginForm = (props) => {
   const [username, setUsersname] = useState('')
   const [password, setPassword] = useState('')
   const [noLogin, setNoLogin] = useState(false)
+  //登录
   const handleLogin = () => {
     props.login(username, password, noLogin)
   }
+  //免登录选项
   const handleNoLogin = () => [
     setNoLogin(!noLogin)
   ]

@@ -12,7 +12,7 @@ import 'markdown-navbar/dist/navbar.css';
 const { TextArea } = Input;
 
 const SingleBlog = ({ loggedUser, setLoggedUser }) => {
-    //目录状态
+    //控制目录状态
     const [open, setOpen] = useState(false);
     const showDrawer = () => {
         setOpen(true);
@@ -22,13 +22,14 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     };
 
     const [comment, setComment] = useState('')
-
     const dispatch = useDispatch()
+
+    //筛选出博客
     const blogs = useSelector(state => state.blogs)
     const id = useParams().id
     const blog = blogs.find((blog) => blog.id === id)
 
-
+    //评论博客
     const handleComment = () => {
         if (comment == '') {
             message.error('请输入评论')
@@ -53,6 +54,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
 
     }
 
+    //点赞博客
     const handleLikes = (id) => {
         //两种保障
         if (loggedUser) {
@@ -80,6 +82,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     if (!blog)
         return null
 
+    //评论头像处理
     let comments = blog.comments.map(
         (item, index) => (
             {
@@ -93,6 +96,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
         <div>
             <div className='blogBox'>
                 <div className='directory'>
+                    {/* 目录开关 */}
                     <Affix offsetTop={350}>
                         <Button onClick={showDrawer} className='drawerBtn'>
                             <UnorderedListOutlined style={{
@@ -100,6 +104,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                             }} />
                         </Button>
                     </Affix>
+                    {/* 目录抽屉 */}
                     <Drawer title="目录" placement="left" onClose={onClose} open={open}>
                         <MarkNav
                             className="toc-list"
@@ -111,6 +116,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                 </div>
 
                 <div className='blogContent'>
+                    {/* 具体博客内容 */}
                     <Card
                         title=<div>{blog.title}</div>
                         hoverable={true}
@@ -145,6 +151,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                 </div>
 
                 <h2 style={{ color: 'rgb(92, 100, 164)', marginTop: '5vh' }}>评论</h2>
+                {/* 评论卡片 */}
                 <List
                     dataSource={comments}
                     renderItem={(item, index) => (
@@ -165,6 +172,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
 
                 >
                 </List>
+                {/* 评论输入框 */}
                 <div className='blogComments'>
                     <TextArea
                         showCount

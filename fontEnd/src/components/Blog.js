@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { List, Avatar, Skeleton, Space, Button, Input, notification } from 'antd';
+import { List, Avatar, Space, Button, Input, notification } from 'antd';
 import { LikeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 import { searchBlogs } from '../reducer/blogReducer';
 const { Search } = Input;
@@ -9,22 +9,25 @@ const { Search } = Input;
 const Blog = ({ loggedUser }) => {
   const dispatch = useDispatch()
   const blogs = useSelector(state => state.blogs)
+  //按点赞数排序,添加头像
   blogs.sort((a, b) => (a.likes.length > b.likes.length ? -1 : 1))
   blogs.forEach((item, index) => {
     //avatar,description,content
     item.avatar = `https://joesch.moe/api/v1/random?key=${index}`
     item.description = '简介：暂无'
   })
+  //搜索博客
   const handleSearch = (value) => {
     dispatch(searchBlogs(value))
   }
+  //展示容器
   const IconText = ({ icon, text }) => (
     <Space>
       {React.createElement(icon)}
       {text}
     </Space>
   );
-
+  //未登录提示
   const openNotification = () => {
     notification.error({
       message: '请先登录再发布',

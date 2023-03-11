@@ -8,6 +8,7 @@ const Users = ({ users }) => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+    
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -18,7 +19,7 @@ const Users = ({ users }) => {
         setSearchText('');
     };
     const getColumnSearchProps = (dataIndex) => ({
-        //自定义过滤
+        //自定义过滤样式与逻辑
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
             <div
                 style={{
@@ -106,6 +107,7 @@ const Users = ({ users }) => {
                 setTimeout(() => searchInput.current?.select(), 100);
             }
         },
+        //展示搜索内容
         render: (text) =>
             searchedColumn === dataIndex ? (
                 // 搜索词高亮
@@ -127,10 +129,10 @@ const Users = ({ users }) => {
     users.forEach((item) => {
         let comments = item.blogs.reduce((pre, cur) => pre + cur.comments.length, 0)
         let likes = item.blogs.reduce((pre, cur) => pre + cur.likes.length, 0)
-        let star=comments+likes*2
-        if (star>7) {
+        let star = comments + likes * 2
+        if (star > 7) {
             item.status = '火爆'
-        } else if (star>4) {
+        } else if (star > 4) {
             item.status = '活跃'
         } else {
             item.status = '沉寂'

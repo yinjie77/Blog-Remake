@@ -6,6 +6,7 @@ const CreateAccount = (props) => {
   const [name, SetName] = useState('')
   const [password, setPassword] = useState('')
 
+  //注册
   const handleRegister = async () => {
     try {
       await UserService.register({ username, name, password })

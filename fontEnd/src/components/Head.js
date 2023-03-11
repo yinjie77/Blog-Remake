@@ -15,11 +15,11 @@ export default function Head({ loggedUser }) {
     const dispatch = useDispatch()
     const [modalState, setModalState] = useState('登录');
     const [isModalVisible, setIsModalVisible] = useState(false);
-
+    //登录框的展示
     const showModal = () => {
         setIsModalVisible(true);
     };
-
+    //退出登录
     const loginout = () => {
         if (window.localStorage.getItem('loggedBlogappUser')) {
             window.localStorage.removeItem('loggedBlogappUser')
@@ -27,17 +27,17 @@ export default function Head({ loggedUser }) {
         }
         location.replace('/')
     }
-
+    //关闭登录框
     const handleModalCancel = () => {
         setIsModalVisible(false);
         setModalState('登录'); // 回到登录状态
     };
-
+    //自动定位到相应位置
     const move = () => {
         dispatch(resetBlog())
         document.body.scrollTop = document.documentElement.scrollTop = 450
     }
-
+    //登录
     const login = async (username, password, noLogin) => {
         try {
             const user = await loginService.login({

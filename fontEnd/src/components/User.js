@@ -7,6 +7,8 @@ import { deleteBlog } from '../reducer/blogReducer';
 
 const User = ({ user, loggedUser, setLoggedUser }) => {
     const dispatch = useDispatch()
+
+    //删除博客
     const handleRemoving = async (blog) => {
         let res = dispatch(deleteBlog(blog.id))
         res.then(() => {
