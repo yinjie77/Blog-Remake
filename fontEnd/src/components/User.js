@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { List, Card, Popconfirm, Button, Skeleton, message } from 'antd';
 import { LikeOutlined, MessageOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { deleteBlog } from '../reducer/blogReducer';
 
-const User = ({ user, deleteBlog, loggedUser, setLoggedUser }) => {
+const User = ({ user, loggedUser, setLoggedUser }) => {
     const dispatch = useDispatch()
     const handleRemoving = async (blog) => {
         let res = dispatch(deleteBlog(blog.id))

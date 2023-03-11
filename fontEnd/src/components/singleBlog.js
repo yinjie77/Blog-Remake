@@ -29,7 +29,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     const blog = blogs.find((blog) => blog.id === id)
 
 
-    const handleComment = (e) => {
+    const handleComment = () => {
         if (comment == '') {
             message.error('请输入评论')
             return

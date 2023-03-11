@@ -4,22 +4,21 @@ import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import { useDispatch } from 'react-redux'
+import { setBlogs } from "../reducer/blogReducer";
 
-const AddForm = ({ createBlog, setLoggedUser }) => {
+const AddForm = ({ setLoggedUser }) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [value, setValue] = useState(``);
 
   const addBlog = () => {
+    let res = dispatch(setBlogs({
+      title,
+      author,
+      url: value
+    }))
 
-    let res = createBlog(
-      {
-        title: title,
-        author: author,
-        url: value
-      }
-    )
     res.then(() => {
       setTitle('')
       setAuthor('')
