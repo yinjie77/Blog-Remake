@@ -1,5 +1,6 @@
 const logger = require('./logger')
 
+//打印请求信息
 const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method)
   logger.info('Path:  ', request.path)
@@ -8,10 +9,12 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
+//未知请求
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
+//错误请求
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
 
@@ -31,20 +34,18 @@ const errorHandler = (error, request, response, next) => {
 
   next(error)
 }
-const tokenExtractor = (req,res,next) => {
-	const authorization = req.get("authorization")
-	if(authorization && authorization.toLowerCase().startsWith("bearer ")){
-		req.token =  authorization.slice(7)
-		return next()
-	}
-	req.token =  null
-	return next()
+
+//token截取
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get("authorization")
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    req.token = authorization.slice(7)
+    return next()
+  }
+  req.token = null
+  return next()
 }
 
-const userExtractor=(req,res,next)=>{
-
-  
-}
 module.exports = {
   requestLogger,
   unknownEndpoint,

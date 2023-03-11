@@ -8,7 +8,7 @@ const blogSchema = new mongoose.Schema({
     type: String
   }],
   comments: [{
-    type: String 
+    type: String
   }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
