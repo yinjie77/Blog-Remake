@@ -31,17 +31,20 @@ const blogReducer = (state = [], action) => {
     default: return state
   }
 }
+//搜索博客
 export const searchBlogs = (value) => {
   return {
     type: 'SEARCH_BLOG',
     data: value
   }
 }
+//重置博客内容
 export const resetBlog = () => {
   return {
     type: 'RESET_BLOG'
   }
 }
+//拉取博客
 export const initializeBlogs = () => {
   return async dispatch => {
     const blogs = await blogService.getAll()
@@ -53,6 +56,7 @@ export const initializeBlogs = () => {
     })
   }
 }
+//评论博客
 export const setBlogs = (blogObject) => {
   return async dispatch => {
     try {
@@ -69,6 +73,7 @@ export const setBlogs = (blogObject) => {
 
   }
 }
+//点赞博客
 export const addlike = (id, useName) => {
   return async dispatch => {
     try {
@@ -90,6 +95,7 @@ export const addlike = (id, useName) => {
 
   }
 }
+//删除博客
 export const deleteBlog = (id) => {
   return async dispatch => {
     try {
@@ -109,6 +115,7 @@ export const deleteBlog = (id) => {
 
   }
 }
+//评论博客
 export const makeComment = (comment, id) => {
   return async dispatch => {
     try {

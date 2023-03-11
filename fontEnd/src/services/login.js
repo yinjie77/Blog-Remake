@@ -1,9 +1,10 @@
 import axios from "axios";
-const baseurl='/api/login'
+const baseurl = '/api/login'
 
-const login =async newObjcet=>{
-    const response=await axios.post(baseurl,newObjcet)
+//登录
+const login = async newObjcet => {
+    const response = await axios.post(baseurl, newObjcet)
     return response.data
-} 
+}
 
-export default {login}
+export default { login }

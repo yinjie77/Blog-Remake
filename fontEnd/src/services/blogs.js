@@ -2,22 +2,27 @@ import axios from 'axios'
 const baseUrl = '/api/blogs'
 
 let token = null
-
+//修饰token
 const setToken = newToken => {
   token = `bearer ${newToken}`
 }
+
+//获取所有博客
 const getAll = () => {
   const request = axios.get(baseUrl)
   return request.then(response => response.data)
 }
 
+//创建博客
 const create = async newObjcet => {
-  const config = {
+  const header = {
     headers: { Authorization: token }
   }
-  const response = await axios.post(baseUrl, newObjcet, config)
+  const response = await axios.post(baseUrl, newObjcet, header)
   return response.data
 }
+
+//点赞博客
 const updateBlog = async blog => {
   const header = {
     headers: { Authorization: token }
@@ -26,6 +31,8 @@ const updateBlog = async blog => {
   const response = await axios.patch(`${baseUrl}/${blog.id}`, { useName: blog.useName }, header)
   return response.data
 }
+
+//删除博客
 const removeBlog = async blog => {
   const header = {
     headers: { Authorization: token }
@@ -33,6 +40,7 @@ const removeBlog = async blog => {
   await axios.delete(`${baseUrl}/${blog.id}`, header)
 }
 
+//评论博客
 const makeComment = async (comment, id) => {
   const header = {
     headers: { Authorization: token }

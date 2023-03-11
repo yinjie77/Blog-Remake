@@ -29,7 +29,7 @@ const usersReducer = (state = [], action) => {
     default: return state
   }
 }
-
+//添加用户信息
 export const addUsers = (users) => {
   return {
     type: 'ADD_USERS',
@@ -38,6 +38,7 @@ export const addUsers = (users) => {
     }
   }
 }
+// 更新用户关联的博客点赞
 export const addLike2 = (blogId, useName) => {
   return {
     type: 'ADD_LIKE',
@@ -47,6 +48,7 @@ export const addLike2 = (blogId, useName) => {
     }
   }
 }
+// 更新用户关联的博客评论
 export const addComment2 = (blogId, comment) => {
   return {
     type: 'ADD_COMMENT',
