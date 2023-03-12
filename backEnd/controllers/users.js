@@ -2,11 +2,14 @@ const bcrypt = require('bcryptjs')//生成密码哈希值
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
+//注册
 usersRouter.post('/', async (request, response) => {
   const body = request.body
 
+  //将密码哈希处理保存
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(body.password, saltRounds)
+
 
   const user = new User({
     username: body.username,
@@ -17,13 +20,14 @@ usersRouter.post('/', async (request, response) => {
   const savedUser = await user.save()
     .catch(error => {
       response.status(400).json({
-        error: error.message
+        error: error.message //已被注册
       })
     })
 
   response.json(savedUser)
 })
 
+//获取所有用户
 usersRouter.get('/', async (request, response) => {
   const users = await User
     .find({}).populate('blogs', { title: 1, author: 1, url: 1, likes: 1, comments: 1 })
