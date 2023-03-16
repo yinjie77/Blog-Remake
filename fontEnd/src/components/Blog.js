@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { List, Avatar, Space, Button, Input, notification } from 'antd';
@@ -7,6 +7,7 @@ import { searchBlogs } from '../reducer/blogReducer';
 const { Search } = Input;
 
 const Blog = ({ loggedUser }) => {
+  const [search, setSearch] = useState(false)
   const dispatch = useDispatch()
   const blogs = useSelector(state => state.blogs)
   //按点赞数排序,添加头像
@@ -18,6 +19,7 @@ const Blog = ({ loggedUser }) => {
   })
   //搜索博客
   const handleSearch = (value) => {
+    setSearch(true)
     dispatch(searchBlogs(value))
   }
   //展示容器
@@ -70,7 +72,7 @@ const Blog = ({ loggedUser }) => {
           }}
           dataSource={blogs}
           bordered={true}
-          loading={blogs.length == 0 ? true : false}
+          loading={blogs.length == 0 && !search ? true : false}
           renderItem={(item) => (
             <List.Item
               key={item.id}
