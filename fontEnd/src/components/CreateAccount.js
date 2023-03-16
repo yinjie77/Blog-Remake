@@ -56,6 +56,7 @@ const CreateAccount = (props) => {
               message: '只能使用数字、字母和下划线组合',
             },
             { required: true, message: '请输入你的帐号', whitespace: true },
+            { max: 10, message: '请输入10位字符以内的账号' }
           ]}
         >
           <Input placeholder="帐号" onChange={({ target }) => {
@@ -77,6 +78,10 @@ const CreateAccount = (props) => {
             {
               required: true,
               message: '请输入你的密码',
+            },
+            {
+              pattern: /\w+$/,
+              message: '只能使用数字、字母和下划线组合',
             },
           ]}
           hasFeedback

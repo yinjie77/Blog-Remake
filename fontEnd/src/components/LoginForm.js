@@ -30,7 +30,14 @@ const LoginForm = (props) => {
       >
         <Form.Item
           name="username"
-          rules={[{ required: true, message: '请输入你的帐号' }]}
+          rules={[
+            { required: true, message: '请输入你的帐号' },
+            {
+              pattern: /\w+$/,
+              message: '只能使用数字、字母和下划线组合',
+            },
+            { max: 10, message: '请输入10位字符以内的账号' }
+          ]}
         >
           <Input
             prefix={<UserOutlined />}
@@ -42,7 +49,21 @@ const LoginForm = (props) => {
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: '请输入你的密码' }]}
+          rules={[
+            { required: true, message: '请输入你的密码' },
+            {
+              min: 6,
+              message: '请输入大于5个字符的密码',
+            },
+            {
+              max: 20,
+              message: '请输入小于20个字符的密码',
+            },
+            {
+              pattern: /\w+$/,
+              message: '只能使用数字、字母和下划线组合',
+            },
+          ]}
         >
           <Input
             prefix={<LockOutlined />}
