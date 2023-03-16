@@ -14,7 +14,7 @@ const Blog = ({ loggedUser }) => {
   blogs.forEach((item, index) => {
     //avatar,description,content
     item.avatar = `https://joesch.moe/api/v1/random?key=${index}`
-    item.description = '简介：暂无'
+    item.description = '' + item.url.slice(0, 150) + '......'
   })
   //搜索博客
   const handleSearch = (value) => {
@@ -34,6 +34,9 @@ const Blog = ({ loggedUser }) => {
       placement: 'topLeft'
     });
   };
+  const move = () => {
+    document.body.scrollTop = document.documentElement.scrollTop = 450
+  }
   return (
     <div >
       <div className='contentHeadText'>博客</div>
@@ -86,7 +89,7 @@ const Blog = ({ loggedUser }) => {
             >
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar} />}
-                title={<Link to={`/blogs/${item.id}`}>{item.title}</Link>}
+                title={<Link onClick={move} to={`/blogs/${item.id}`}>{item.title}</Link>}
                 description={item.description}
               />
               {item.content}
