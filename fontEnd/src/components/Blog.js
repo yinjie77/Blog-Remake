@@ -14,7 +14,7 @@ const Blog = ({ loggedUser }) => {
   blogs.sort((a, b) => (a.likes.length > b.likes.length ? -1 : 1))
   blogs.forEach((item, index) => {
     //avatar,description,content
-    item.avatar = `https://joesch.moe/api/v1/random?key=${index}`
+    item.avatar = `https://joesch.moe/api/v1/random?key=${index + 1}`
     item.description = '' + item.url.slice(0, 150) + '......'
   })
   //搜索博客

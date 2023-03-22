@@ -86,7 +86,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     let comments = blog.comments.map(
         (item, index) => (
             {
-                avatar: `https://joesch.moe/api/v1/random?key=${index}`,
+                avatar: `https://joesch.moe/api/v1/random?key=${index + 1}`,
                 content: (<p>{item}</p>)
             }
         )
