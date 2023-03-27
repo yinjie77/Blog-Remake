@@ -49,7 +49,7 @@ export default function Head({ loggedUser }) {
             blogService.setToken(user.token)
             dispatch(setLoggedUser(user))
             message.success('登陆成功')
-            location.replace('/')
+            location.reload()
         } catch (error) {
             message.error('账号或密码错误')
         }
