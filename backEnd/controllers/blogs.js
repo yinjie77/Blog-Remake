@@ -3,21 +3,6 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
-//token校验
-const verifyToken = (token) => {
-	//验证token是否存在
-	if (!token) {
-		return response.status(401).json({ error: 'token missing ' })
-	}
-	//验证token是否有效
-	try {
-		let decodedToken = jwt.verify(token, process.env.SECRET)
-		return decodedToken
-	} catch (error) {
-		return response.status(401).json({ error: 'token expired' })
-	}
-}
-
 //获取所有博客
 blogsRouter.get('/', async (request, response) => {
 	const blogs = await Blog.find({})
@@ -28,7 +13,18 @@ blogsRouter.get('/', async (request, response) => {
 blogsRouter.post('/', async (request, response, next) => {
 	const blog = new Blog(request.body)
 
-	let decodedToken = verifyToken(request.token)
+	let decodedToken
+	//验证token是否存在
+	if (!request.token) {
+		return response.status(401).json({ error: 'token missing ' })
+	}
+	//验证token是否有效
+	try {
+		decodedToken = jwt.verify(request.token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
+
 
 	//博客保存
 	const user = await User.findById(decodedToken.id)
@@ -44,7 +40,17 @@ blogsRouter.post('/', async (request, response, next) => {
 //删除博客
 blogsRouter.delete("/:id", async (request, response) => {
 
-	let decodedToken = verifyToken(request.token)
+	let decodedToken
+	//验证token是否存在
+	if (!request.token) {
+		return response.status(401).json({ error: 'token missing ' })
+	}
+	//验证token是否有效
+	try {
+		decodedToken = jwt.verify(request.token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
 
 	//删除操作
 	const id = request.params.id
@@ -64,7 +70,16 @@ blogsRouter.delete("/:id", async (request, response) => {
 //点赞博客
 blogsRouter.patch("/:id", async (request, response) => {
 
-	verifyToken(request.token)
+	//验证token是否存在
+	if (!request.token) {
+		return response.status(401).json({ error: 'token missing ' })
+	}
+	//验证token是否有效
+	try {
+		jwt.verify(request.token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
 
 	//加入名称数组
 	const id = request.params.id
@@ -76,7 +91,17 @@ blogsRouter.patch("/:id", async (request, response) => {
 //评论博客
 blogsRouter.post("/:id/comments", async (request, response) => {
 
-	verifyToken(request.token)
+
+	//验证token是否存在
+	if (!request.token) {
+		return response.status(401).json({ error: 'token missing ' })
+	}
+	//验证token是否有效
+	try {
+		jwt.verify(request.token, process.env.SECRET)
+	} catch (error) {
+		return response.status(401).json({ error: 'token expired' })
+	}
 
 	//加入评论数组
 	const id = request.params.id
