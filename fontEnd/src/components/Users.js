@@ -8,7 +8,7 @@ const Users = ({ users }) => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
-    
+
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -61,22 +61,6 @@ const Users = ({ users }) => {
                         }}
                     >
                         清空
-                    </Button>
-                    <Button
-                        type="link"
-                        size="small"
-                        onClick={() => {
-                            confirm({
-                                closeDropdown: false,
-                            });
-                            setSearchText(selectedKeys[0]);
-                            setSearchedColumn(dataIndex);
-                        }}
-                        style={{
-                            color: '#5c64a4'
-                        }}
-                    >
-                        过滤
                     </Button>
                     <Button
                         type="link"
