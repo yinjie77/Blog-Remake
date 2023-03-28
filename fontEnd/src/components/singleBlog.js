@@ -29,11 +29,13 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     const id = useParams().id
     const blog = blogs.find((blog) => blog.id === id)
     useEffect(() => {
-        let visit = (blog.visit || 0) + 1
-        let res = dispatch(addVisit(blog.id, visit))
-        res.then(() => {
-            dispatch(addVisit2(blog.id, visit))
-        })
+        if (blog) {
+            let visit = (blog.visit || 0) + 1
+            let res = dispatch(addVisit(blog.id, visit))
+            res.then(() => {
+                dispatch(addVisit2(blog.id, visit))
+            })
+        }
     }, [])
     //评论博客
     const handleComment = () => {
