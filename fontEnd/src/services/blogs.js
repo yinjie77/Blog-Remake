@@ -48,4 +48,10 @@ const makeComment = async (comment, id) => {
   const response = await axios.post(`${baseUrl}/${id}/comments`, { comment }, header)
   return response.data
 }
-export default { getAll, create, setToken, updateBlog, removeBlog, makeComment }
+
+//访问量+1
+const addVisit = async (id, visit) => {
+  const response = await axios.post(`${baseUrl}/${id}/visit`, { visit })
+  return response.data
+}
+export default { getAll, create, setToken, updateBlog, removeBlog, makeComment, addVisit }

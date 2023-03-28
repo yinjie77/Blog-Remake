@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { List, Card, Popconfirm, Button, Skeleton, message } from 'antd';
-import { LikeOutlined, MessageOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { LikeOutlined, MessageOutlined, QuestionCircleOutlined, EyeOutlined } from '@ant-design/icons';
 import { deleteBlog } from '../reducer/blogReducer';
 
 const User = ({ user, loggedUser, setLoggedUser }) => {
@@ -52,8 +52,9 @@ const User = ({ user, loggedUser, setLoggedUser }) => {
                                         title={<Link className='blogName' to={`/blogs/${item.id}`} >{item.title}</Link>}
                                     >
                                         <div className='cardContnet'>
-                                            <div >
-                                                <span className='likes'> <LikeOutlined /> {item.likes.length}</span>
+                                            <div className='iconSpan'>
+                                                <span > <EyeOutlined /> {item.visit}</span>
+                                                <span > <LikeOutlined /> {item.likes.length}</span>
                                                 <span > <MessageOutlined /> {item.comments.length}</span>
                                             </div>
                                             {

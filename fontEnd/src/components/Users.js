@@ -113,15 +113,15 @@ const Users = ({ users }) => {
     users.forEach((item) => {
         let comments = item.blogs.reduce((pre, cur) => pre + cur.comments.length, 0)
         let likes = item.blogs.reduce((pre, cur) => pre + cur.likes.length, 0)
-        let star = comments + likes * 2
-        if (star > 7) {
+        let visit = item.blogs.reduce((pre, cur) => pre + cur.visit, 0)
+        let star = comments + likes * 2 + visit * 0.1
+        if (star > 10) {
             item.status = '火爆'
-        } else if (star > 4) {
+        } else if (star > 6) {
             item.status = '活跃'
         } else {
             item.status = '沉寂'
         }
-
     })
 
     const columns = [
@@ -138,6 +138,17 @@ const Users = ({ users }) => {
             render: (text) => {
                 return (
                     <div>{text.length}</div>
+                )
+            }
+        },
+        {
+            title: '访问量',
+            dataIndex: 'blogs',
+            className: 'TableText',
+            render: (text) => {
+                let visit = text.reduce((pre, cur) => pre + cur.visit, 0)
+                return (
+                    <div>{visit}</div>
                 )
             }
         },

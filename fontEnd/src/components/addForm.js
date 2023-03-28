@@ -16,7 +16,8 @@ const AddForm = ({ setLoggedUser }) => {
     let res = dispatch(setBlogs({
       title,
       author,
-      url: value
+      url: value,
+      visit: 0
     }))
 
     res.then(() => {

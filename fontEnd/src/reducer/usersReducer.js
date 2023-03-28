@@ -26,6 +26,17 @@ const usersReducer = (state = [], action) => {
       })
       return res
     }
+    case 'USER_ADD_VISIT': {
+      let res = [...state]
+      res.forEach((user) => {
+        user.blogs.forEach((blog) => {
+          if (blog.id == action.data.blogId) {
+            blog.visit = action.data.visit
+          }
+        })
+      })
+      return res
+    }
     default: return state
   }
 }
@@ -55,6 +66,17 @@ export const addComment2 = (blogId, comment) => {
     data: {
       blogId,
       comment
+    }
+  }
+}
+
+// 更新用户关联的访问量
+export const addVisit2 = (blogId, visit) => {
+  return {
+    type: 'USER_ADD_VISIT',
+    data: {
+      blogId,
+      visit
     }
   }
 }

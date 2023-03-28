@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { makeComment, addlike } from '../reducer/blogReducer'
-import { addLike2, addComment2 } from '../reducer/usersReducer'
+import { makeComment, addlike, addVisit } from '../reducer/blogReducer'
+import { addLike2, addComment2, addVisit2 } from '../reducer/usersReducer'
 import { Button, Card, List, Input, message, Affix, Drawer, Avatar } from 'antd';
-import { LikeOutlined, UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
+import { LikeOutlined, UnorderedListOutlined, UserOutlined, EyeOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';     // 解析 markdown
 import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
 import MarkNav from 'markdown-navbar';          // markdown 目录
@@ -28,7 +28,13 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     const blogs = useSelector(state => state.blogs)
     const id = useParams().id
     const blog = blogs.find((blog) => blog.id === id)
-
+    useEffect(() => {
+        let visit = (blog.visit || 0) + 1
+        let res = dispatch(addVisit(blog.id, visit))
+        res.then(() => {
+            dispatch(addVisit2(blog.id, visit))
+        })
+    }, [])
     //评论博客
     const handleComment = () => {
         if (comment == '') {
@@ -121,14 +127,15 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                         title=<div>{blog.title}</div>
                         hoverable={true}
                         headStyle={{
-                            textAlign: 'center',
-                            fontSize: '3em',
+                            fontSize: '4em',
                             color: '#5c64a4'
                         }}
                         bordered={true}
                         extra={
                             <div className='blogAuthor'>
                                 <UserOutlined /> 作者:{blog.author}
+                                <br></br>
+                                <EyeOutlined /> 访问量：{blog.visit}
                             </div>
                         }
                         actions={[

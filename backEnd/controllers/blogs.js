@@ -114,4 +114,16 @@ blogsRouter.post("/:id/comments", async (request, response) => {
 		response.status(400).send({ error: "Comment is missing" })
 	}
 })
+
+//博客访问量+1
+blogsRouter.post("/:id/visit", async (request, response) => {
+
+	const id = request.params.id
+	const blog = {
+		visit: request.body.visit
+	}
+	const updatedBlog = await Blog.findByIdAndUpdate(id, blog)
+
+	response.json(updatedBlog)
+})
 module.exports = blogsRouter

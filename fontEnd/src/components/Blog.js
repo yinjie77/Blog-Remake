@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { List, Avatar, Space, Button, Input, notification } from 'antd';
-import { LikeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
+import { LikeOutlined, MessageOutlined, UserOutlined, EyeOutlined } from '@ant-design/icons';
 import { searchBlogs } from '../reducer/blogReducer';
 const { Search } = Input;
 
@@ -77,6 +77,7 @@ const Blog = ({ loggedUser }) => {
             <List.Item
               key={item.id}
               actions={[
+                <IconText icon={EyeOutlined} text={item.visit} key="list-vertical-message" />,
                 <IconText icon={UserOutlined} text={item.author} key="list-vertical-like-o" />,
                 <IconText icon={LikeOutlined} text={item.likes.length} key="list-vertical-like-o" />,
                 <IconText icon={MessageOutlined} text={item.comments.length} key="list-vertical-message" />,

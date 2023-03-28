@@ -28,6 +28,11 @@ const blogReducer = (state = [], action) => {
       blogs = state.map(blog => blog.id === action.data.id ? { ...blog, comments: [...blog.comments, action.data.comment] } : blog)
       return blogs
     }
+    case 'ADD_VISIT': {
+      blogs = state.map(blog => blog.id === action.data.id ? { ...blog, visit: action.data.visit } : blog)
+      return blogs
+    }
+
     default: return state
   }
 }
@@ -56,7 +61,7 @@ export const initializeBlogs = () => {
     })
   }
 }
-//评论博客
+//发布博客
 export const setBlogs = (blogObject) => {
   return async dispatch => {
     try {
@@ -134,6 +139,23 @@ export const makeComment = (comment, id) => {
       throw new Error('token过期')
     }
 
+  }
+}
+
+//博客访问
+export const addVisit = (id, visit) => {
+  return async dispatch => {
+    const blog = await blogService.addVisit(
+      id,
+      visit
+    )
+    dispatch({
+      type: 'ADD_VISIT',
+      data: {
+        id,
+        visit
+      }
+    })
   }
 }
 export default blogReducer

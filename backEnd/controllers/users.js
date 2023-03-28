@@ -30,7 +30,7 @@ usersRouter.post('/', async (request, response) => {
 //获取所有用户
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({}).populate('blogs', { title: 1, author: 1, url: 1, likes: 1, comments: 1 })
+    .find({}).populate('blogs', { title: 1, author: 1, url: 1, likes: 1, comments: 1, visit: 1 })
   response.json(users)
 })
 // populate 方法是 find 方法这一初始查询方法后的一个链式调用。populate 方法的入参，定义了存储在 User 中的 Blog id， 这些 id 指向了 blogs Collection 的 blog，而这些 id 也会被真实的 blog 所替代。
