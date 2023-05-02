@@ -14,7 +14,7 @@ const Blog = ({ loggedUser }) => {
   blogs.sort((a, b) => (a.likes.length > b.likes.length ? -1 : 1))
   blogs.forEach((item, index) => {
     //avatar,description,content
-    item.avatar = `https://joesch.moe/api/v1/random?key=${index + 1}`
+    item.avatar = `https://xsgames.co/randomusers/assets/avatars/pixel/${index + 1}.jpg`
     item.description = '' + item.url.slice(0, 150) + '......'
   })
   //搜索博客
@@ -85,8 +85,10 @@ const Blog = ({ loggedUser }) => {
               extra={
                 <img
                   width={272}
+                  height={170}
                   alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  src={`https://source.unsplash.com/1600x900/?${item.title}`}
+                  loading="lazy"
                 />
               }
             >

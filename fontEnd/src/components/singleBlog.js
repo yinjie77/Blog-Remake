@@ -94,7 +94,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
     let comments = blog.comments.map(
         (item, index) => (
             {
-                avatar: `https://joesch.moe/api/v1/random?key=${index + 1}`,
+                avatar: `https://xsgames.co/randomusers/assets/avatars/pixel/${index + 1}.jpg`,
                 content: (<p>{item}</p>)
             }
         )
@@ -118,7 +118,7 @@ const SingleBlog = ({ loggedUser, setLoggedUser }) => {
                             className="toc-list"
                             source={blog.url}
                             ordered={true}
-                            headingTopOffset={-450}
+                            headingTopOffset={-445}
                         />
                     </Drawer>
                 </div>
