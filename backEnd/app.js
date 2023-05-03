@@ -23,7 +23,7 @@ mongoose.connect(config.MONGODB_URI)
 app.use(historty())
 app.use(cors())//跨域实现
 app.use(express.static('build'))//显示前端部署
-app.use(express.json())//Json-parser 的功能是获取请求的 JSON 数据，将其转换为 JavaScript 对象，然后在调用路由处理程序之前将其附加到请求对象的 body 属性。
+app.use(express.json({ limit: "10mb" }))//Json-parser 的功能是获取请求的 JSON 数据，将其转换为 JavaScript 对象，然后在调用路由处理程序之前将其附加到请求对象的 body 属性。
 app.use(middleware.requestLogger)//请求具体信息
 app.use(middleware.tokenExtractor)//token截取
 app.use('/api/blogs', blogsRouter)
