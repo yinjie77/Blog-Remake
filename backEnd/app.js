@@ -12,7 +12,7 @@ const historty = require('connect-history-api-fallback')
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
+mongoose.connect("mongodb://localhost:27017")
   .then(() => {
     logger.info('connected to MongoDB')
   })
